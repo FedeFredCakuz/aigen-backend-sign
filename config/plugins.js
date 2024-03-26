@@ -6,7 +6,7 @@ module.exports = ({ env }) => ({
   },
   'site-publisher': {
     config: {
-      owner: 'FedeFredCakuz', // The Github organisation or user
+      owner: 'fredcakuz', // The Github organisation or user
       repo: 'aigen-backend-sign', // The name of the repository
       workflow_id: 'firebase-hosting-merge.yml', // The workflow_id or filename
       token: env('GITHUB_TOKEN'), // The GitHub personal access token with access to trigger workflows and view build status
