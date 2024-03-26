@@ -20,7 +20,7 @@ This example deploys self-hosted version of [Strapi](https://strapi.io/). Intern
 When developing locally this Strapi template will connect to the Postgres server from its public [TCP Proxy](https://docs.railway.app/deploy/exposing-your-app#tcp-proxying)
 
 - Clone the repository locally
-- Install the dependencies with `yarn install` or `npm install`
+- Install the dependencies with `yarn install`
 - Install the Railway CLI, instructions for that can be found [here](https://docs.railway.app/develop/cli#installation)
     - If this is your first time using the CLI make sure to login with `railway login`
 - Within the local repository run `railway link` to link the local repository to the Strapi service on Railway
