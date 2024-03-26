@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "workers",
+  "info": {
+    "singularName": "worker",
+    "pluralName": "workers",
+    "displayName": "Worker",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Surname": {
+      "type": "string"
+    },
+    "JobTitle": {
+      "type": "string"
+    },
+    "Mobile": {
+      "type": "string"
+    },
+    "Email": {
+      "type": "string",
+      "required": true
+    },
+    "SkypeId": {
+      "type": "string"
+    },
+    "Permalink": {
+      "type": "uid",
+      "targetField": "Email",
+      "required": true
+    },
+    "business": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::business.business",
+      "inversedBy": "workers"
+    }
+  }
+}

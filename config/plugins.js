@@ -4,6 +4,20 @@ module.exports = ({ env }) => ({
       jwtSecret: env('JWT_SECRET'),
     },
   },
+  'site-publisher': {
+    config: {
+      owner: 'FedeFredCakuz', // The Github organisation or user
+      repo: 'aigen-backend-sign', // The name of the repository
+      workflow_id: 'firebase-hosting-merge.yml', // The workflow_id or filename
+      token: env('GITHUB_TOKEN'), // The GitHub personal access token with access to trigger workflows and view build status
+      branch: 'main', // The branch the workflow should be triggered on
+      inputs: {
+        // Optional inputs to pass through to the GitHub workflow
+        // some_input: 'Some value',
+        // some_other_input: 'Some other value',
+      }
+    }
+  },
   upload: {
     config: {
       provider: 'cloudinary',

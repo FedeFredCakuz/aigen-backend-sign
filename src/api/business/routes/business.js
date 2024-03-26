@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * test-cazzo router
+ * business router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::test-cazzo.test-cazzo');
+module.exports = createCoreRouter('api::business.business');
