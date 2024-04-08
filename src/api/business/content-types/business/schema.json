@@ -61,6 +61,9 @@
     },
     "PrivacyFooter": {
       "type": "text"
+    },
+    "SubTitle": {
+      "type": "string"
     }
   }
 }

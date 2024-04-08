@@ -362,6 +362,96 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiBusinessBusiness extends Schema.CollectionType {
+  collectionName: 'businesses';
+  info: {
+    singularName: 'business';
+    pluralName: 'businesses';
+    displayName: 'Business';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    Phone: Attribute.String;
+    Email: Attribute.String & Attribute.Required;
+    Address: Attribute.String;
+    City: Attribute.String;
+    Logo: Attribute.Media;
+    SocialLinkedInUrl: Attribute.String;
+    SocialWebsiteUrl: Attribute.String;
+    Cap: Attribute.String;
+    workers: Attribute.Relation<
+      'api::business.business',
+      'oneToMany',
+      'api::worker.worker'
+    >;
+    PartnerLogo: Attribute.Media & Attribute.Required;
+    PrivacyFooter: Attribute.Text;
+    SubTitle: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::business.business',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::business.business',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWorkerWorker extends Schema.CollectionType {
+  collectionName: 'workers';
+  info: {
+    singularName: 'worker';
+    pluralName: 'workers';
+    displayName: 'Worker';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String;
+    Surname: Attribute.String;
+    JobTitle: Attribute.String;
+    Mobile: Attribute.String;
+    Email: Attribute.String & Attribute.Required;
+    SkypeId: Attribute.String;
+    Permalink: Attribute.UID<'api::worker.worker', 'Email'> &
+      Attribute.Required;
+    business: Attribute.Relation<
+      'api::worker.worker',
+      'manyToOne',
+      'api::business.business'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::worker.worker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::worker.worker',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -768,95 +858,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiBusinessBusiness extends Schema.CollectionType {
-  collectionName: 'businesses';
-  info: {
-    singularName: 'business';
-    pluralName: 'businesses';
-    displayName: 'Business';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String;
-    Phone: Attribute.String;
-    Email: Attribute.String & Attribute.Required;
-    Address: Attribute.String;
-    City: Attribute.String;
-    Logo: Attribute.Media;
-    SocialLinkedInUrl: Attribute.String;
-    SocialWebsiteUrl: Attribute.String;
-    Cap: Attribute.String;
-    workers: Attribute.Relation<
-      'api::business.business',
-      'oneToMany',
-      'api::worker.worker'
-    >;
-    PartnerLogo: Attribute.Media & Attribute.Required;
-    PrivacyFooter: Attribute.Text;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::business.business',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::business.business',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWorkerWorker extends Schema.CollectionType {
-  collectionName: 'workers';
-  info: {
-    singularName: 'worker';
-    pluralName: 'workers';
-    displayName: 'Worker';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Name: Attribute.String;
-    Surname: Attribute.String;
-    JobTitle: Attribute.String;
-    Mobile: Attribute.String;
-    Email: Attribute.String & Attribute.Required;
-    SkypeId: Attribute.String;
-    Permalink: Attribute.UID<'api::worker.worker', 'Email'> &
-      Attribute.Required;
-    business: Attribute.Relation<
-      'api::worker.worker',
-      'manyToOne',
-      'api::business.business'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::worker.worker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::worker.worker',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -867,6 +868,8 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::business.business': ApiBusinessBusiness;
+      'api::worker.worker': ApiWorkerWorker;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -875,8 +878,6 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::business.business': ApiBusinessBusiness;
-      'api::worker.worker': ApiWorkerWorker;
     }
   }
 }
